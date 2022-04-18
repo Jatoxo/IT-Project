@@ -21,8 +21,12 @@ _global_script_class_icons={
 [application]
 
 config/name="IT Project"
-run/main_scene="res://Scenes/Level1.tscn"
+run/main_scene="res://Scenes/Level.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 
