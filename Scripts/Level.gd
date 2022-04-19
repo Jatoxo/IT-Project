@@ -14,12 +14,12 @@ func _ready() -> void:
 			$Player.totalCoins += 1
 
 func complete():
-	get_tree().change_scene("res://Scenes/Level2.tscn")
+	var _err = get_tree().change_scene("res://Scenes/Level2.tscn")
 	
 func allCoins():
 	player.showTextbox(["You have collected all the coins in this level.", "Congratulations.", "That is all you can do here.", "Have fun."])
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	if($Player.global_position.y > 10000 and not $Player.die):
 		$Player.die = true

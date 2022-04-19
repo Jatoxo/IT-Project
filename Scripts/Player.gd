@@ -79,7 +79,7 @@ func complete():
 		get_parent().complete()
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	#print(rotation_degrees)
 	#print(rotation)
@@ -191,11 +191,9 @@ func set_gravity(var direction : Vector2, var instant = false):
 	rotationfix = fmod(fixrot, 2.0*PI)
 	
 	var fixit = false
-	var fixdir = 1.0
 	
 	if abs(rad2deg(target_rot) - rad2deg(fixrot)) > 300:
 		if rad2deg(target_rot) - rad2deg(fixrot) <= 0:
-			fixdir = -1.0
 			target_rot = target_rot + (4.0*PI)
 		fixit = true
 		
@@ -209,7 +207,7 @@ func set_gravity(var direction : Vector2, var instant = false):
 		block_movement = false
 	else:
 			
-		var initVal = rotationfix + (2.0*PI if fixit else 0)
+		var initVal = rotationfix + (2.0*PI if fixit else 0.0)
 		
 	
 		$Tween.interpolate_property(self, "rotationfix", initVal, target_rot, 0.1, Tween.TRANS_LINEAR)
@@ -222,7 +220,7 @@ func reset_gravity():
 
 
 
-func _on_spokey_body_entered(body: Node) -> void:
+func _on_spokey_body_entered(_body: Node) -> void:
 	pass # Replace with function body.
 
 func die():

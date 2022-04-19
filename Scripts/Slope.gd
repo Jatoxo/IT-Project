@@ -4,7 +4,7 @@ var bodies := []
 
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for body in bodies:
 		if body.name == "Player" and body.is_on_floor():
 			var grav : Vector2 = body.get_floor_normal()
