@@ -105,7 +105,6 @@ texture = ExtResource( 8 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 64, 105.967 )
-z_index = 6
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 64, 107.933 )

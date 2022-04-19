@@ -271,14 +271,12 @@ font_data = SubResource( 28 )
 z_index = 6
 script = ExtResource( 2 )
 accelerationCurve = SubResource( 15 )
-maxSpeed = 225
 jump = 700
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
 animation = "down"
-frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
