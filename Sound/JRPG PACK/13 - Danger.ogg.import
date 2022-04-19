@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/13 - Danger.ogg-335fcb6ef5678e0eb9f2b0d15617103b.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/13 - Danger.ogg"
+dest_files=[ "res://.import/13 - Danger.ogg-335fcb6ef5678e0eb9f2b0d15617103b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

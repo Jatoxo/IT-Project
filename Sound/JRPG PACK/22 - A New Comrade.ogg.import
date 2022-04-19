@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/22 - A New Comrade.ogg-2e253dd6db2371ae82dc5c6fff5b5f06.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/22 - A New Comrade.ogg"
+dest_files=[ "res://.import/22 - A New Comrade.ogg-2e253dd6db2371ae82dc5c6fff5b5f06.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

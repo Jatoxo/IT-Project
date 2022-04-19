@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/05 - Reunion.ogg-935707b129dbf08dabe9595eea345464.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/05 - Reunion.ogg"
+dest_files=[ "res://.import/05 - Reunion.ogg-935707b129dbf08dabe9595eea345464.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/04 - Sanctuary.ogg-7ce7e441e9993f0b772e32f2b3452531.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/04 - Sanctuary.ogg"
+dest_files=[ "res://.import/04 - Sanctuary.ogg-7ce7e441e9993f0b772e32f2b3452531.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

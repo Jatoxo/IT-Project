@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/21 - Fanfare.ogg-8a4c864b64b7b2e9699b33ea6c1f7e0e.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/21 - Fanfare.ogg"
+dest_files=[ "res://.import/21 - Fanfare.ogg-8a4c864b64b7b2e9699b33ea6c1f7e0e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,129 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Graphics/Menu/textbox.png" type="Texture" id=1]
+[ext_resource path="res://Sound/text scroll.wav" type="AudioStream" id=2]
+[ext_resource path="res://Scripts/Textbox.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=5]
+resource_name = "Reveal"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Reveal"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sound:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -4.0, -4.0, -80.0 ]
+}
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Font/Welbut__.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+use_mipmaps = true
+font_data = SubResource( 3 )
+
+[node name="Textbox" type="NinePatchRect"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -216.0
+margin_top = -128.0
+margin_right = 216.0
+margin_bottom = -8.0
+texture = ExtResource( 1 )
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="BoxAnim" type="AnimationPlayer" parent="."]
+playback_speed = 3.0
+anims/Reveal = SubResource( 5 )
+
+[node name="TextAnim" type="AnimationPlayer" parent="."]
+anims/Reveal = SubResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 24
+custom_constants/margin_top = 24
+custom_constants/margin_left = 24
+custom_constants/margin_bottom = 24
+
+[node name="Label" type="Label" parent="MarginContainer"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 408.0
+margin_bottom = 96.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 2 )
+text = "Hello, I am a string of text! I am, in fact, a very long string of text. One could say, I am the longest string of text.
+"
+align = 1
+autowrap = true
+clip_text = true
+percent_visible = 0.0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -4.0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

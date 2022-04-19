@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/10 - The Empire.ogg-0c6c1edf145e79a56c519eb2a5130ece.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/10 - The Empire.ogg"
+dest_files=[ "res://.import/10 - The Empire.ogg-0c6c1edf145e79a56c519eb2a5130ece.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

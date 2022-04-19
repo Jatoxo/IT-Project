@@ -8,11 +8,16 @@ export(Vector2) var expanse = Vector2(100, 50)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
 	var shape : RectangleShape2D = $CollisionShape2D.shape
 	shape.extents = expanse
 	var size = shape.extents * 2
 	$PanelContainer.rect_size = size
 	$PanelContainer.rect_position = $CollisionShape2D.position - size * 0.5
+	$TextureRect.rect_rotation = rad2deg(Vector2.UP.angle_to(gravityDirection))
+	
+	
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,6 +28,7 @@ func _process(delta: float) -> void:
 		var size = shape.extents * 2
 		$PanelContainer.rect_size = size
 		$PanelContainer.rect_position = $CollisionShape2D.position - size * 0.5
+		$TextureRect.rect_rotation = rad2deg(Vector2.UP.angle_to(gravityDirection))
 		
 #	pass
 

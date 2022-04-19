@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Font/Welbut__.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Graphics/sign.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Sign.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Textbox.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 64, 46.5 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "ReadHint"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Control/Label:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Sign" type="Area2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -22.0
+custom_fonts/font = SubResource( 1 )
+text = "Press F to read sign"
+align = 1
+
+[node name="Textbox" parent="CanvasLayer/Control" instance=ExtResource( 4 )]
+
+[node name="Label" parent="CanvasLayer/Control/Textbox/MarginContainer" index="0"]
+percent_visible = 1.0
+
+[node name="Sound" parent="CanvasLayer/Control/Textbox" index="5"]
+volume_db = -80.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 2 )
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+playback_speed = 4.0
+anims/ReadHint = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_Sign_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Sign_body_exited"]
+[connection signal="closed" from="CanvasLayer/Control/Textbox" to="." method="_on_Textbox_closed"]
+
+[editable path="CanvasLayer/Control/Textbox"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/20 - Game Over.ogg-43d171a7c60481a0ee2ebde3bdec8d53.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/20 - Game Over.ogg"
+dest_files=[ "res://.import/20 - Game Over.ogg-43d171a7c60481a0ee2ebde3bdec8d53.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

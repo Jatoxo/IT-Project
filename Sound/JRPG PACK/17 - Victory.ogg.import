@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/17 - Victory.ogg-3df39273a87ccef8ab212bcc4659db40.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/17 - Victory.ogg"
+dest_files=[ "res://.import/17 - Victory.ogg-3df39273a87ccef8ab212bcc4659db40.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

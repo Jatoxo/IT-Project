@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/text scroll.mp3-fec4f48df2a84c34ba23e548fcb4a63c.mp3str"
+
+[deps]
+
+source_file="res://Graphics/Menu/text scroll.mp3"
+dest_files=[ "res://.import/text scroll.mp3-fec4f48df2a84c34ba23e548fcb4a63c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

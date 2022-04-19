@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/24 - RV 610 - Fecit potentiam.ogg-ad77ea3a9aeae79cc93cec51766b6a79.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/24 - RV 610 - Fecit potentiam.ogg"
+dest_files=[ "res://.import/24 - RV 610 - Fecit potentiam.ogg-ad77ea3a9aeae79cc93cec51766b6a79.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

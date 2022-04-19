@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/02 - BWV 1007 - Prelude.ogg-c9ac2ba285c22abe882d1e8925a8eec2.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/02 - BWV 1007 - Prelude.ogg"
+dest_files=[ "res://.import/02 - BWV 1007 - Prelude.ogg-c9ac2ba285c22abe882d1e8925a8eec2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

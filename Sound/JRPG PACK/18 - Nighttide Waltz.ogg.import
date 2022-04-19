@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/18 - Nighttide Waltz.ogg-a42ddc0b72c8ae0a641f7ca8b9564c37.oggstr"
+
+[deps]
+
+source_file="res://Sound/JRPG PACK/18 - Nighttide Waltz.ogg"
+dest_files=[ "res://.import/18 - Nighttide Waltz.ogg-a42ddc0b72c8ae0a641f7ca8b9564c37.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

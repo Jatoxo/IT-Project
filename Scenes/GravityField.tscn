@@ -47,12 +47,12 @@ texture = ExtResource( 4 )
 script = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
 self_modulate = Color( 1, 1, 1, 0.337255 )
 margin_left = -50.0
 margin_top = -34.0
 margin_right = 50.0
 margin_bottom = 31.0
+rect_pivot_offset = Vector2( 50, 35 )
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 2
