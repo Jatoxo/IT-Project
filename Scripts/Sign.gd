@@ -44,6 +44,7 @@ func read():
 func _unhandled_input(event: InputEvent) -> void:
 	if reachable and not reader.block_movement and event.is_action_pressed("Interact"):
 		read()
+		get_tree().set_input_as_handled()
 
 func _on_Sign_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
