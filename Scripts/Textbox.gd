@@ -39,6 +39,7 @@ func close():
 		$Tween.interpolate_property(self, "rect_position", null, rect_position + Vector2(0, 200), 0.3, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		$Tween.start()
 		yield($BoxAnim, "animation_finished")
+		visible = false
 		emit_signal("closed")
 	
 

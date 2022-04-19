@@ -120,7 +120,6 @@ percent_visible = 0.0
 [node name="TextureButton" type="TextureButton" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-expand = true
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
