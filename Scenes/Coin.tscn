@@ -108,7 +108,7 @@ scale = Vector2( 0.55, 0.55 )
 z_index = 1
 frames = SubResource( 1 )
 animation = "spin"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Bling" type="AudioStreamPlayer2D" parent="."]

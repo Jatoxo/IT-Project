@@ -4,9 +4,8 @@ extends Area2D
 export(Array, String, MULTILINE) var signText = ["I am a sign."]
 
 var reaction = []
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
+
+
 var reachable = false
 
 onready var textbox = $CanvasLayer/Control/Textbox
@@ -24,6 +23,7 @@ func setSignText(var text):
 func read():
 	if not textbox.closed:
 		return
+	
 	if reader.has_method("read_sign"):
 		reader.read_sign()
 		reacted = false
@@ -38,19 +38,18 @@ func read():
 	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
 func _unhandled_input(event: InputEvent) -> void:
 	if reachable and not reader.block_movement and event.is_action_pressed("Interact"):
 		read()
 		get_tree().set_input_as_handled()
+
 
 func _on_Sign_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		reader = body
 		reachable = true
 		$Animation.play("ReadHint")
+
 
 func _on_Sign_body_exited(body: Node) -> void:
 	if body.is_in_group("Player"):

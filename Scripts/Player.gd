@@ -60,34 +60,29 @@ func _unhandled_input(event: InputEvent) -> void:
 		showTextbox(["You pressed the q button.", "Good job.", "(This is for debugging)"])
 	elif event.is_action_pressed("Die"):
 		die()
-		
-	#	next_gravity()
-	#if event.is_action_pressed("Action 2"):
-	#	prev_gravity()
-		
 
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready() -> void:
-
-	
 	$AnimationPlayer.play("reset")
 	coinLabel.set_text(str(coins) + "/" + str(totalCoins))
-	pass # Replace with function body.
+
+
 
 func complete():
 	if(get_parent().has_method("complete")):
 		get_parent().complete()
-		
+
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	
-	#print(rotation_degrees)
-	#print(rotation)
 	var rot = stepify(-rad2deg(upDirection.angle_to(Vector2.UP)), 0.05)
 	
 	var normal_motion = motion.rotated(-deg2rad(rot))
 	normal_motion.x = stepify(normal_motion.x, 0.0001)
-	#print(normal_motion)
+	
 	
 	if normal_motion.x < -0.1:
 		sprite.flip_h = true
@@ -111,8 +106,8 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not block_movement:
 	
+	if not block_movement:
 		
 		var vector := Vector2(0,0)
 		var rot = stepify(rad2deg(-upDirection.angle_to(Vector2.UP)), 0.05)
@@ -121,7 +116,7 @@ func _physics_process(delta: float) -> void:
 		motion = motion.rotated(-rot)
 		motion.x = stepify(motion.x, 0.0001)
 		motion.y = stepify(motion.y, 0.0001)
-		#print(motion)
+		
 		motion.y += gravity * delta 
 		
 		
@@ -140,12 +135,11 @@ func _physics_process(delta: float) -> void:
 		#For some reason the x component of motion is not zero when it should be by a very small amount, so round it down
 		motion.x = stepify(motion.x, 0.0001)
 		
-		#print(motion)
-	
+		
 		motion = move_and_slide(motion, upDirection, false, 4, deg2rad(20))
 		
 	
-	
+	#Handle collision with TileMap
 	for i in range(get_slide_count()):
 		
 		var collision = get_slide_collision(i)
@@ -153,11 +147,11 @@ func _physics_process(delta: float) -> void:
 			var tilemap : TileMap = collision.collider
 			var cell = tilemap.world_to_map(collision.position - collision.normal)
 			var tile_id = tilemap.get_cellv(cell)
+			#If player collides with spikes, death
 			if tile_id == 3:
 				die()
 			
-	
-	
+
 
 
 func _on_CheckButton_toggled(button_pressed: bool) -> void:
@@ -175,14 +169,15 @@ func prev_gravity():
 func set_gravity(var direction : Vector2, var instant = false):
 	if direction == upDirection:
 		return
+	
 	upDirection = direction
-	#print("Orig:" + str(rotation_degrees))
+	
 	
 	var target_rot = Vector2.UP.angle_to(upDirection)
+	#Convert rotation into a positive value
 	if target_rot < 0:
 		target_rot = 2.0*PI - abs(target_rot)
-	
-	#print("Fix:" + str(rad2deg(target_rot)))
+
 	
 	var fixrot = rotation
 	if fixrot < 0:
@@ -190,14 +185,14 @@ func set_gravity(var direction : Vector2, var instant = false):
 	
 	rotationfix = fmod(fixrot, 2.0*PI)
 	
-	var fixit = false
 	
 	if abs(rad2deg(target_rot) - rad2deg(fixrot)) > 300:
 		if rad2deg(target_rot) - rad2deg(fixrot) <= 0:
 			target_rot = target_rot + (4.0*PI)
-		fixit = true
 		
-
+		rotationfix += 2*PI
+		
+	
 	if not instant:
 		$GravitySwoosh.play()
 		$Tween.interpolate_property(self, "rotation", null, target_rot, 0.3,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
@@ -206,11 +201,8 @@ func set_gravity(var direction : Vector2, var instant = false):
 		yield(get_tree().create_timer(0.2), "timeout")
 		block_movement = false
 	else:
-			
-		var initVal = rotationfix + (2.0*PI if fixit else 0.0)
 		
-	
-		$Tween.interpolate_property(self, "rotationfix", initVal, target_rot, 0.1, Tween.TRANS_LINEAR)
+		$Tween.interpolate_property(self, "rotationfix", rotationfix, target_rot, 0.1, Tween.TRANS_LINEAR)
 		$Tween.start()
 		
 	
@@ -218,10 +210,6 @@ func reset_gravity():
 	set_gravity(Vector2.UP)
 
 
-
-
-func _on_spokey_body_entered(_body: Node) -> void:
-	pass # Replace with function body.
 
 func die():
 	block_movement = true
@@ -242,8 +230,6 @@ func _on_Player_coin_collected() -> void:
 	if coins == totalCoins:
 		if(get_parent().has_method("allCoins")):
 			get_parent().allCoins()
-		#yield(get_tree().create_timer(1), "timeout")
-		
 
 
 func _on_Area_area_entered(area: Area2D) -> void:

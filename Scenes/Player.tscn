@@ -277,7 +277,6 @@ jump = 700
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
 animation = "down"
-frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -398,6 +397,5 @@ one_shot = true
 
 [connection signal="coin_collected" from="." to="." method="_on_Player_coin_collected"]
 [connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
-[connection signal="body_entered" from="Area" to="." method="_on_spokey_body_entered"]
 [connection signal="toggled" from="GUI/Control/CheckButton" to="." method="_on_CheckButton_toggled"]
 [connection signal="timeout" from="Die" to="." method="_on_Die_timeout"]

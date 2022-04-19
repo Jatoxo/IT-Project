@@ -36,6 +36,6 @@ func _process(_delta: float) -> void:
 			$Sign.setSignText(["Enjoy the solid ground.", "It is everywhere.", "The ground.", "No pits.", "OKAY?"])
 			$Sign.reaction = ["It seems...", "More aggressive."]
 		else:
-			$Player.showTextbox(["You are persistent, I'll give you that", "Alright, Alright, you can have somewhere else to play."], "complete")
+			$Player.showTextbox(["You are persistent, I'll give you that.", "Alright, Alright, you can have somewhere else to play."], "complete")
 			
 
