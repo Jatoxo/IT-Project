@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Graphics/Menu/textbox.png" type="Texture" id=1]
 [ext_resource path="res://Sound/text scroll.wav" type="AudioStream" id=2]
@@ -58,6 +58,77 @@ tracks/2/keys = {
 "values": [ -4.0, -4.0, -80.0 ]
 }
 
+[sub_resource type="Animation" id=9]
+resource_name = "Accepted"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkipHint/NextHint:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SkipHint/NextHint:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 256, 331 ), Vector2( 340.8, 331 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Highlight"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkipHint/NextHint:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 256, 331 ), Vector2( 251.65, 331 ), Vector2( 256, 331 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Reveal"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkipHint/NextHint:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SkipHint/NextHint:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 256, 331 ) ]
+}
+
 [sub_resource type="DynamicFontData" id=3]
 font_path = "res://Font/Welbut__.ttf"
 
@@ -66,14 +137,19 @@ size = 12
 use_mipmaps = true
 font_data = SubResource( 3 )
 
+[sub_resource type="DynamicFont" id=6]
+size = 13
+use_mipmaps = true
+font_data = SubResource( 3 )
+
 [node name="Textbox" type="NinePatchRect"]
-modulate = Color( 1, 1, 1, 0 )
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -216.0
-margin_top = -128.0
+margin_top = -144.0
 margin_right = 216.0
 margin_bottom = -8.0
 texture = ExtResource( 1 )
@@ -95,6 +171,12 @@ anims/Reveal = SubResource( 5 )
 [node name="TextAnim" type="AnimationPlayer" parent="."]
 anims/Reveal = SubResource( 4 )
 
+[node name="HintAnim" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/Accepted = SubResource( 9 )
+anims/Highlight = SubResource( 7 )
+anims/Reveal = SubResource( 8 )
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,15 +189,13 @@ custom_constants/margin_bottom = 24
 margin_left = 24.0
 margin_top = 24.0
 margin_right = 408.0
-margin_bottom = 96.0
-size_flags_vertical = 1
+margin_bottom = 81.0
+size_flags_vertical = 0
 custom_fonts/font = SubResource( 2 )
 text = "Hello, I am a string of text! I am, in fact, a very long string of text. One could say, I am the longest string of text.
 "
 align = 1
 autowrap = true
-clip_text = true
-percent_visible = 0.0
 
 [node name="TextureButton" type="TextureButton" parent="."]
 anchor_right = 1.0
@@ -123,6 +203,26 @@ anchor_bottom = 1.0
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -4.0
+volume_db = -80.0
+
+[node name="SkipHint" type="CanvasLayer" parent="."]
+
+[node name="NextHint" type="Label" parent="SkipHint"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -299.2
+margin_top = -29.0
+margin_right = 84.805
+custom_fonts/font = SubResource( 6 )
+text = "Space >  "
+align = 2
+
+[node name="HintTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="timeout" from="HintTimer" to="." method="_on_HintTimer_timeout"]

@@ -90,7 +90,7 @@ func _process(_delta: float) -> void:
 		sprite.flip_h = false
 		
 	if is_on_floor():
-		if abs(normal_motion.x) > 0.2:
+		if abs(normal_motion.x) > 0.2 and not block_movement:
 			sprite.play("run")
 			
 			var speed : float = abs(normal_motion.x)
@@ -240,8 +240,10 @@ func _on_Area_area_entered(area: Area2D) -> void:
 
 func showTextbox(var text, var closed = null):
 	var boxes = $GUI/Control/Textboxes.get_children()
-	for child in boxes:
-		child.queue_free() 
+	for textbox in boxes:
+		if not textbox.closed:
+			textbox.close(true)
+		textbox.queue_free() 
 	
 	var new_box = textbox.instance()
 	new_box.name = "Textbox"
