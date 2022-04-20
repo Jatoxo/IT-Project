@@ -277,6 +277,7 @@ jump = 700
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
 animation = "down"
+frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

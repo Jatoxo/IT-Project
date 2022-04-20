@@ -24,6 +24,8 @@ onready var sprite : AnimatedSprite = $AnimatedSprite
 
 var block_movement = false
 
+var gravField = null
+
 
 var coins := 0 setget set_coins, get_coins
 var totalCoins := 0  setget set_total_coins, get_total_coins
@@ -106,7 +108,6 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
 	if not block_movement:
 		
 		var vector := Vector2(0,0)
@@ -136,7 +137,7 @@ func _physics_process(delta: float) -> void:
 		motion.x = stepify(motion.x, 0.0001)
 		
 		
-		motion = move_and_slide(motion, upDirection, false, 4, deg2rad(20))
+		motion = move_and_slide(motion, upDirection, true, 4, deg2rad(20))
 		
 	
 	#Handle collision with TileMap

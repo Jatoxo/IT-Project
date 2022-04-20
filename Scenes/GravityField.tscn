@@ -6,7 +6,7 @@
 [ext_resource path="res://Graphics/arrow.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 131.15, 214.05 )
+extents = Vector2( 100, 50 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 0.219608, 0.219608, 0.313726 )
@@ -56,6 +56,10 @@ rect_pivot_offset = Vector2( 50, 35 )
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 2
+
+[node name="ExitTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_GravityField_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_GravityField_body_exited"]

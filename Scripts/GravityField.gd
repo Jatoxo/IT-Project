@@ -33,6 +33,8 @@ func update_shapes() -> void:
 
 
 func _on_GravityField_body_entered(body: Node) -> void:
+	body.gravField = self
+	$ExitTimer.stop()
 	yield(get_tree().create_timer(0.1), "timeout")
 	if body.has_method("set_gravity"):
 		body.set_gravity(gravityDirection.normalized() * -1)
@@ -40,7 +42,9 @@ func _on_GravityField_body_entered(body: Node) -> void:
 
 
 func _on_GravityField_body_exited(body: Node) -> void:
-	yield(get_tree().create_timer(0.1), "timeout")
+	$ExitTimer.start()
+	yield($ExitTimer, "timeout")
 	if body.has_method("reset_gravity"):
-		body.reset_gravity()
+		if body.gravField == self:
+			body.reset_gravity()
 	
