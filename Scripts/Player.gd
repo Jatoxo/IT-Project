@@ -222,9 +222,9 @@ func die():
 	$AnimationPlayer.play("reset")
 	reset_gravity()
 	global_position = spawn
-	emit_signal("respawned")
 	die = false
 	block_movement = false
+	emit_signal("respawned")
 	
 
 

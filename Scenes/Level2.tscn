@@ -74,9 +74,6 @@ position = Vector2( 874.501, -34.6908 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 874.409, -12.7435 )
 
-[node name="AnimatedSprite" parent="Player" index="0"]
-frame = 0
-
 [node name="ColorRect" parent="Player/CanvasLayer" index="1"]
 fadeDelay = 1.5
 fadeSpeed = 1.0
@@ -119,5 +116,6 @@ tile_data = PoolIntArray( -196597, 1073741824, 0, -196596, 1073741824, 0, -19659
 [connection signal="body_exited" from="LoopCounts/2" to="." method="_on_loop_count_body_exited" binds= [ 1 ]]
 [connection signal="body_exited" from="LoopCounts/3" to="." method="_on_loop_count_body_exited" binds= [ 2 ]]
 [connection signal="body_exited" from="LoopCounts/4" to="." method="_on_loop_count_body_exited" binds= [ 3 ]]
+[connection signal="respawned" from="Player" to="." method="_on_Player_respawned"]
 
 [editable path="Player"]

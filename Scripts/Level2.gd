@@ -5,6 +5,31 @@ var laps = 0 setget set_laps, get_laps
 
 var visited = []
 
+var ded = 0
+
+var spikes_spawned = true
+
+func set_deaths(var new_val):
+	ded = new_val
+	if(ded == 4):
+		get_node(spawn_node).global_position.y -= 230
+		player.spawn = get_node(spawn_node).global_position
+		yield(player, "respawned")
+
+func complete():
+	print("You have beaten the game")
+	pass
+
+func _process(_delta: float) -> void:
+	
+	if(player.global_position.y > 10000 and not player.die):
+		player.die = true
+		player.showTextbox(["Here you are again.", "In a bottomless pit.", "What an achievement."], "complete")
+		yield(player, "textbox_closed")
+		player.showTextbox(["You have beaten the game."])
+		
+
+
 
 func set_laps(var new_laps : int) -> void:
 	laps = new_laps
@@ -30,7 +55,12 @@ func set_laps(var new_laps : int) -> void:
 			spawn_spikes()
 			yield(get_tree().create_timer(0.5), "timeout")
 			player.showTextbox(["Try doging these!"])
+			yield(player, "respawned")
 			
+			yield(get_tree().create_timer(0.2), "timeout")
+			
+			player.showTextbox(["Wow.", "Can't even dodge some tiny spikes?", "Keep trying, you'll get it.", "There is a reward at 100 laps.", "Good luck."])
+			yield(player, "textbox_closed")
 			
 	
 func get_laps() -> int:
@@ -54,6 +84,7 @@ func allCoins():
 
 
 func spawn_spikes():
+	spikes_spawned = true
 	var map : TileMap = $TileMap
 	map.set_cell(11, -1, 3, true, false, true)
 	map.set_cell(13, -1, 3, false, false, true)
@@ -79,3 +110,7 @@ func _on_loop_count_body_exited(body: Node, pos : int) -> void:
 			
 			
 
+
+
+func _on_Player_respawned() -> void:
+	set_deaths(ded + 1)

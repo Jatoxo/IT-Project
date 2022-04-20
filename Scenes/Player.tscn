@@ -270,6 +270,7 @@ font_data = ExtResource( 3 )
 z_index = 6
 script = ExtResource( 2 )
 accelerationCurve = SubResource( 15 )
+maxSpeed = 1000
 jump = 700
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
