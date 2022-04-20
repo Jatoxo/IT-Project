@@ -12,6 +12,8 @@ const textbox = preload("res://Scenes/Textbox.tscn")
 
 
 signal coin_collected
+signal respawned
+signal textbox_closed
 
 var spawn : Vector2
 
@@ -220,6 +222,7 @@ func die():
 	$AnimationPlayer.play("reset")
 	reset_gravity()
 	global_position = spawn
+	emit_signal("respawned")
 	die = false
 	block_movement = false
 	
@@ -254,9 +257,11 @@ func showTextbox(var text, var closed = null):
 	new_box.open()
 	block_movement = true
 	yield(new_box, "closed")
+	
 	if closed != null and has_method(closed):
 		call(closed)
 	block_movement = false
+	emit_signal("textbox_closed")
 
 func dieMsg():
 	$Die.start()

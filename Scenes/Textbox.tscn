@@ -144,6 +144,7 @@ font_data = SubResource( 3 )
 
 [node name="Textbox" type="NinePatchRect"]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -208,14 +209,13 @@ volume_db = -80.0
 [node name="SkipHint" type="CanvasLayer" parent="."]
 
 [node name="NextHint" type="Label" parent="SkipHint"]
-modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -299.2
+margin_left = -383.508
 margin_top = -29.0
-margin_right = 84.805
+margin_right = 0.500732
 custom_fonts/font = SubResource( 6 )
 text = "Space >  "
 align = 2

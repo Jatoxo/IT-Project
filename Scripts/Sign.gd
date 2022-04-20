@@ -44,6 +44,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().set_input_as_handled()
 
 
+
 func _on_Sign_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		reader = body

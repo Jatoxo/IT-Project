@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Font/Welbut__.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Graphics/sign.png" type="Texture" id=2]
@@ -10,6 +10,21 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 64, 46.5 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Control/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "ReadHint"
@@ -51,12 +66,6 @@ align = 1
 
 [node name="Textbox" parent="CanvasLayer/Control" instance=ExtResource( 4 )]
 
-[node name="Label" parent="CanvasLayer/Control/Textbox/MarginContainer" index="0"]
-percent_visible = 1.0
-
-[node name="Sound" parent="CanvasLayer/Control/Textbox" index="5"]
-volume_db = -80.0
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
@@ -66,6 +75,7 @@ shape = SubResource( 2 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
+anims/RESET = SubResource( 4 )
 anims/ReadHint = SubResource( 3 )
 
 [connection signal="body_entered" from="." to="." method="_on_Sign_body_entered"]

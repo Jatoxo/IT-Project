@@ -24,8 +24,8 @@ func open():
 	closed = false
 	currentLine = 0
 	displayText()
-	visible = true
 	$BoxAnim.play("Reveal")
+	visible = true
 	
 	if finalpos == null:
 		finalpos = rect_position
