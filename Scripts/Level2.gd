@@ -7,14 +7,15 @@ var visited = []
 
 var ded = 0
 
-var spikes_spawned = true
+var spikes_spawned = false
 
 func set_deaths(var new_val):
 	ded = new_val
 	if(ded == 4):
-		get_node(spawn_node).global_position.y -= 230
+		get_node(spawn_node).global_position.y -= 280
 		player.spawn = get_node(spawn_node).global_position
 		yield(player, "respawned")
+
 
 func complete():
 	print("You have beaten the game")
@@ -22,6 +23,9 @@ func complete():
 
 func _process(_delta: float) -> void:
 	
+	
+		
+		
 	if(player.global_position.y > 10000 and not player.die):
 		player.die = true
 		player.showTextbox(["Here you are again.", "In a bottomless pit.", "What an achievement."], "complete")
@@ -57,10 +61,10 @@ func set_laps(var new_laps : int) -> void:
 			player.showTextbox(["Try doging these!"])
 			yield(player, "respawned")
 			
-			yield(get_tree().create_timer(0.2), "timeout")
+			#yield(get_tree().create_timer(0.1), "timeout")
 			
 			player.showTextbox(["Wow.", "Can't even dodge some tiny spikes?", "Keep trying, you'll get it.", "There is a reward at 100 laps.", "Good luck."])
-			yield(player, "textbox_closed")
+			#yield(player, "textbox_closed")
 			
 	
 func get_laps() -> int:
@@ -113,4 +117,6 @@ func _on_loop_count_body_exited(body: Node, pos : int) -> void:
 
 
 func _on_Player_respawned() -> void:
-	set_deaths(ded + 1)
+
+	if spikes_spawned:
+		set_deaths(ded + 1)

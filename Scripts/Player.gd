@@ -26,8 +26,12 @@ onready var sprite : AnimatedSprite = $AnimatedSprite
 
 var block_movement = false
 
+#Various issues arise from using a single bool, so use an array instead and only unblock when empty
+var block_movement2 = []
+
 var gravField = null
 
+var dead
 
 var coins := 0 setget set_coins, get_coins
 var totalCoins := 0  setget set_total_coins, get_total_coins
@@ -58,12 +62,12 @@ func get_total_coins():
 	return totalCoins
 
 func _unhandled_input(event: InputEvent) -> void:
-	if block_movement:
+	if block_movement or block_movement2.size() != 0:
 		return
 	if event.is_action_pressed("Q"):
 		showTextbox(["You pressed the q button.", "Good job.", "(This is for debugging)"])
 	elif event.is_action_pressed("Die"):
-		die()
+		kill()
 
 
 
@@ -84,17 +88,21 @@ func _process(_delta: float) -> void:
 	
 	var rot = stepify(-rad2deg(upDirection.angle_to(Vector2.UP)), 0.05)
 	
+	if motion.x > maxSpeed:
+		pass#print(motion.x)
+	
 	var normal_motion = motion.rotated(-deg2rad(rot))
 	normal_motion.x = stepify(normal_motion.x, 0.0001)
-	
-	
+		
 	if normal_motion.x < -0.1:
 		sprite.flip_h = true
 	if normal_motion.x > 0.1:
 		sprite.flip_h = false
 		
+		
+		
 	if is_on_floor():
-		if abs(normal_motion.x) > 0.2 and not block_movement:
+		if abs(normal_motion.x) > 0.2 and not block_movement and not block_movement2.size() != 0:
 			sprite.play("run")
 			
 			var speed : float = abs(normal_motion.x)
@@ -110,7 +118,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not block_movement:
+	if not block_movement and not block_movement2.size() != 0:
 		
 		var vector := Vector2(0,0)
 		var rot = stepify(rad2deg(-upDirection.angle_to(Vector2.UP)), 0.05)
@@ -131,6 +139,8 @@ func _physics_process(delta: float) -> void:
 		
 		if not is_on_wall():
 			motion.x = vector.x * maxSpeed
+		
+	
 
 		
 		motion = motion.rotated(rot)
@@ -141,19 +151,21 @@ func _physics_process(delta: float) -> void:
 		
 		motion = move_and_slide(motion, upDirection, true, 4, deg2rad(20))
 		
+		var makedie = false
+		#Handle collision with TileMap
+		for i in range(get_slide_count()):
+			var collision = get_slide_collision(i)
+			if collision.collider is TileMap:
+				var tilemap : TileMap = collision.collider
+				var cell = tilemap.world_to_map(collision.position - collision.normal)
+				var tile_id = tilemap.get_cellv(cell)
+				#If player collides with spikes, death
+				if tile_id == 3:
+					kill()
+					break
+				
+				
 	
-	#Handle collision with TileMap
-	for i in range(get_slide_count()):
-		
-		var collision = get_slide_collision(i)
-		if collision.collider is TileMap:
-			var tilemap : TileMap = collision.collider
-			var cell = tilemap.world_to_map(collision.position - collision.normal)
-			var tile_id = tilemap.get_cellv(cell)
-			#If player collides with spikes, death
-			if tile_id == 3:
-				die()
-			
 
 
 
@@ -200,9 +212,9 @@ func set_gravity(var direction : Vector2, var instant = false):
 		$GravitySwoosh.play()
 		$Tween.interpolate_property(self, "rotation", null, target_rot, 0.3,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		$Tween.start()
-		block_movement = true
+		block_movement2.append("gravity_switch")
 		yield(get_tree().create_timer(0.2), "timeout")
-		block_movement = false
+		block_movement2.erase("gravity_switch")
 	else:
 		
 		$Tween.interpolate_property(self, "rotationfix", rotationfix, target_rot, 0.1, Tween.TRANS_LINEAR)
@@ -214,17 +226,25 @@ func reset_gravity():
 
 
 
-func die():
-	block_movement = true
-	motion = Vector2.ZERO
-	$AnimationPlayer.play("die")
-	yield(get_node("AnimationPlayer"), "animation_finished")
-	$AnimationPlayer.play("reset")
-	reset_gravity()
-	global_position = spawn
-	die = false
-	block_movement = false
-	emit_signal("respawned")
+func kill():
+	if not dead:
+		dead = true
+		block_movement2.append("kill")
+		motion = Vector2.ZERO
+		move_and_slide(motion)
+		$AnimationPlayer.play("die")
+		yield(get_node("AnimationPlayer"), "animation_finished")
+		$AnimationPlayer.play("reset")
+		reset_gravity()
+		global_position = spawn
+		die = false
+		#block_movement2.erase("kill")
+		emit_signal("respawned")
+		yield(get_tree().create_timer(0.2), "timeout")
+		dead = false
+		motion = Vector2.ZERO
+		block_movement2.erase("kill")
+		
 	
 
 
@@ -274,4 +294,4 @@ func quit_sign():
 
 
 func _on_Die_timeout() -> void:
-	die()
+	kill()
